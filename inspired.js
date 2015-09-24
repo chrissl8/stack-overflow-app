@@ -1,11 +1,17 @@
+/*
+StackOverflow Reputation Builder App
+By Chris Slaight, 2015
+"Get Inspired Feature" Simplified AJAX/JSON logic for working with Stack API
+*/
 
-
+//Initial function on page load
 $(function(){
 	$('.inspiration-getter').submit(function(){
 		//event.preventDefault();
-		$('.results').html('');
-		$('.inspiredResults').html('');
-		var selectedTopic = $(this).find("input[name='answerers']").val();
+		$('.results').html(''); //Set previous results div to blank
+		$('.inspiredResults').html(''); //Set inspiredResults div to blank as well
+		$('.search-results').html(''); //Set counter to blank as well
+		var selectedTopic = $(this).find("input[name='answerers']").val(); //Grab input from form
 		getRequest(selectedTopic);
 		console.log("Form submitted");
 		
@@ -20,12 +26,12 @@ function getRequest(selectedTopic) {
 	var url = 'http://api.stackexchange.com/2.2/tags/' + selectedTopic + '/top-answerers/all_time';
 
 	$.getJSON(url, params, function(data){
-		showResults(data.items);
-		console.log("Performed getJSON");
+		showResults(selectedTopic, data.items, data.items.length);
+		console.log("Performed getJSON, there are " + data.items.length + "items for this search");
 	});
 };
 
-function showResults(results){
+function showResults(topic, results, count){
 	var html = "";
 	//$('.inspiredResults').html(html);
 	console.log(results.length);
@@ -41,55 +47,8 @@ function showResults(results){
 			html += '<dt>Accept Rate: </dt>';
 			html += '<dd class="accept-rate">' + value.user.accept_rate + '</dd>';
 			html += '</dl>';
-
-			/*html += '<div class="resultBox">';
-			html += '<a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" target="newtab"><img src="' + value.snippet.thumbnails.default.url + '"></a>';
-			html += '<p><a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" target="newtab">' + value.snippet.title + '</a></p>';
-			html += '<p>' + value.snippet.description + '</p>';
-			html += '<p>Channel: ' + value.snippet.channelTitle + '</p>';
-			html += '</div>';
-			
-			html += '<div class="inspiredResults">';
-			html += '<p>' + value.user.display_name + '</p>';
-			/*
-			html += '<p><a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" target="newtab">' + value.snippet.title + '</a></p>';
-			html += '<p>' + value.snippet.description + '</p>';
-			html += '<p>Channel: ' + value.snippet.channelTitle + '</p>';
-			
-			html += '</div>';
-
-
-			console.log(value);
-
-			/*
-			$('.templates .answerer').clone();
-	
-			// Set the question properties in result
-			var displayName = $('.display-name a');
-			displayName.attr('href', value.link);
-			displayName.text(value.display_name);
-
-			// set the #views for question property in result
-			var reputation = $('.reputation');
-			reputation.text(value.reputation);
-
-			// set the #views for question property in result
-			var userType = $('.user-type');
-			userType.text(value.user_type);
-
-			// set the #views for question property in result
-			var acceptRate = $('.accept-rate');
-			acceptRate.text(value.accept_rate);
-			*/
-
-			//var answerer = showInspired(item);
-			//$('.results').append(answerer);
 	});
-
+	$('.search-results').html(count + ' results for <strong>' + topic);
 	$('.results').html(html);
 	$('.inspiredResults').show();
-
-	//$('.templates').show();
-	//$('#search-results').html(html);
-	//$('#search-results').fadeIn(1500);
 };
