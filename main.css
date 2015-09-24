@@ -1,6 +1,38 @@
+.body {
+	font-family: 'Inconsolata', Arial;
+	background-color: #F1F1F1;
+}
+
 .container {
 	margin: 3em auto;
 	width: 600px;
+	background-color: rgb(68, 68, 68);
+    border-radius: 10px;
+    color: white;
+    font-family: 'Inconsolata', Arial;
+    padding: 1em 1em 1em 1em;
+    box-shadow: 0px 6px 12px rgb(68, 68, 68);
+}
+
+.text-input {
+	font-family: 'Inconsolata', Arial;
+    padding: 8px;
+    border: 3px dashed white;
+    border-radius: 10px;
+    background-color: rgb(68, 68, 68);
+    font-size: 1.2em;
+    color: white;
+}
+
+.buttons {
+	font-family: 'Inconsolata', Arial;
+	padding: 8px;
+    border: 3px dotted white;
+    border-radius: 10px;
+    background-color: rgb(68, 68, 68);
+    font-size: 1.2em;
+    color: white;
+	
 }
 
 .hidden {
@@ -28,18 +60,37 @@
 }
 .stack {
 	clear: both;
+	text-align: center;
 }
 
 .inspiration { 
 	margin-left: 3em;
 }
 
+.results-container {
+	margin-top: 1em;
+}
+
+.search-results {
+	margin: .5em;
+}
+
 .result {
-	border: 1px solid black;
+	border: 3px dashed rgb(68, 68, 68);
+	background-color: #F1F1F1;
+	color: rgb(68, 68, 68);
+	padding: 5px;
+	margin: 0 auto 1em auto;
+	font-family: 'Inconsolata', Arial;
+}
+
+.inspiredResults {
+	display: none;
+	width: 600px;
+	font-family: 'Inconsolata', Arial;
 	padding: 5px;
 	margin: 0 auto 1em auto;
 }
-
 .error {
 	background-color: #F78181;
 	padding: 1em;
